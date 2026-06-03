@@ -1,0 +1,539 @@
+﻿@model SIP.Models.SesionEditVm
+
+@{
+    ViewData["Title"] = "Sesión clínica";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <input type="hidden" id="SesionIdActual" value="@Model.SesionId" />
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+        <div>
+            <h2 class="text-sip mb-0">
+                <i class="bi bi-journal-medical"></i> Sesión clínica
+            </h2>
+            <div class="text-muted small">
+                Sesión #@Model.SesionId · Cita #@Model.CitaId · Expediente #@Model.ExpedienteId
+            </div>
+        </div>
+
+        <a asp-controller="Citas" asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver a citas
+        </a>
+        <a asp-controller="Expedientes"
+           asp-action="Detalle"
+           asp-route-id="@Model.ExpedienteId"
+           class="btn btn-outline-sip">
+            <i class="bi bi-folder2-open"></i> Ver expediente
+        </a>
+    </div>
+
+    @if (TempData["Ok"] != null)
+    {
+        <div class="alert alert-success">@TempData["Ok"]</div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <!-- CONTEXTO -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header sip-card-header d-flex justify-content-between align-items-center">
+            <div class="fw-semibold">
+                <i class="bi bi-calendar2-check"></i> Contexto de la sesión
+            </div>
+
+            @if (Model.EstaFinalizada)
+            {
+                <span class="badge bg-success">Sesión finalizada</span>
+            }
+            else
+            {
+                <span class="badge bg-warning text-dark">Sesión en curso</span>
+            }
+        </div>
+
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="text-muted small">Paciente</div>
+                    <div class="fw-semibold">@Model.PacienteNombre</div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="text-muted small">Terapeuta</div>
+                    <div class="fw-semibold">@Model.TerapeutaNombre</div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="text-muted small">Fecha y hora</div>
+                    <div class="fw-semibold">@Model.FechaHora.ToString("dd/MM/yyyy hh:mm tt")</div>
+                </div>
+
+                @if (Model.EstaFinalizada && Model.FechaFin != null)
+                {
+                    <div class="col-md-12">
+                        <div class="text-muted small">Fecha de finalización</div>
+                        <div class="fw-semibold text-success">
+                            @Model.FechaFin?.ToString("dd/MM/yyyy hh:mm tt")
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- FORMULARIO SESION -->
+    <form asp-controller="Sesiones" asp-action="Editar" method="post" id="formSesion">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="SesionId" />
+        <input type="hidden" asp-for="CitaId" />
+        <input type="hidden" asp-for="UsuarioId" />
+        <input type="hidden" asp-for="ExpedienteId" />
+        <input type="hidden" asp-for="FechaHora" />
+
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header sip-card-header">
+                <div class="fw-semibold">
+                    <i class="bi bi-clipboard2-heart"></i> Información clínica
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label asp-for="Motivo" class="form-label">Motivo</label>
+                        <input asp-for="Motivo"
+                               class="form-control"
+                               placeholder="Ej. ansiedad, estrés, duelo..."
+                               disabled="@(Model.EstaFinalizada ? "disabled" : null)" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Diagnostico" class="form-label">Diagnóstico</label>
+                        <input asp-for="Diagnostico"
+                               class="form-control"
+                               placeholder="Diagnóstico preliminar o seguimiento"
+                               disabled="@(Model.EstaFinalizada ? "disabled" : null)" />
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="NotasClinicas" class="form-label">Notas clínicas</label>
+                        <textarea asp-for="NotasClinicas"
+                                  class="form-control"
+                                  rows="5"
+                                  placeholder="Describe observaciones, evolución, intervención realizada..."
+                                  disabled="@(Model.EstaFinalizada ? "disabled" : null)"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Recomendaciones" class="form-label">Recomendaciones</label>
+                        <textarea asp-for="Recomendaciones"
+                                  class="form-control"
+                                  rows="3"
+                                  placeholder="Tareas, ejercicios, acuerdos o recomendaciones..."
+                                  disabled="@(Model.EstaFinalizada ? "disabled" : null)"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2">
+
+                @if (!Model.EstaFinalizada)
+                {
+                    <button type="submit" class="btn btn-sip" id="btnGuardarSesion">
+                        <i class="bi bi-save2"></i> Guardar cambios
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-outline-danger"
+                            id="btnFinalizarSesion">
+                        <i class="bi bi-check2-circle"></i> Finalizar sesión
+                    </button>
+                }
+                else
+                {
+                    <span class="text-muted align-self-center">
+                        Esta sesión ya fue finalizada.
+                    </span>
+                }
+
+            </div>
+        </div>
+    </form>
+
+    <!-- FORM FINALIZAR -->
+    @if (!Model.EstaFinalizada)
+    {
+        <form asp-controller="Sesiones"
+              asp-action="Finalizar"
+              method="post"
+              id="formFinalizarSesion">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="sesionId" value="@Model.SesionId" />
+        </form>
+    }
+
+    <!-- PAGOS DEMO -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header sip-card-header d-flex justify-content-between align-items-center">
+            <div class="fw-semibold">
+                <i class="bi bi-cash-coin"></i> Pagos de la sesión
+            </div>
+
+            @if (!Model.EstaFinalizada)
+            {
+                <button type="button" class="btn btn-outline-sip btn-sm" data-bs-toggle="modal" data-bs-target="#modalPago">
+                    <i class="bi bi-plus-circle"></i> Registrar pago
+                </button>
+            }
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-sm align-middle mb-0" id="tblPagosSesion">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                            <th>Método</th>
+                            <th>Estatus</th>
+                            <th>Referencia</th>
+                            <th>Comentarios</th>
+                            <th class="text-end">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="7" class="text-center text-muted">Cargando pagos...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- MODAL PAGO DEMO -->
+<div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header sip-modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-cash-coin"></i> Registrar pago
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="formPago">
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden" id="PagoSesionId" name="PagoSesionId" value="0" />
+                    <input type="hidden" id="SesionIdPago" name="SesionId" value="@Model.SesionId" />
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Monto</label>
+                            <input class="form-control" id="Monto" name="Monto" type="number" step="0.01" min="0" />
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Método</label>
+                            <select class="form-select" id="MetodoPagoId" name="MetodoPagoId">
+                                <option value="">Selecciona</option>
+                                <option value="1">Efectivo</option>
+                                <option value="2">Transferencia</option>
+                                <option value="3">Tarjeta</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Estatus</label>
+                            <select class="form-select" id="EstatusPagoId" name="EstatusPagoId">
+                                <option value="">Selecciona</option>
+                                <option value="1">Pagado</option>
+                                <option value="2">Parcial</option>
+                                <option value="3">Pendiente</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Referencia</label>
+                            <input class="form-control" id="Referencia" name="Referencia" maxlength="100" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Comentarios</label>
+                            <input class="form-control" id="Comentarios" name="Comentarios" maxlength="250" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-sip" type="button" id="btnGuardarPago">
+                    <i class="bi bi-save2"></i> Guardar pago
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (TempData["Ok"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Correcto',
+                text: '@TempData["Ok"]',
+                confirmButtonColor: '#7A4A2E'
+            });
+        </script>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '@TempData["Error"]',
+                confirmButtonColor: '#7A4A2E'
+            });
+        </script>
+    }
+
+    <script>
+        const btnFinalizar = document.getElementById('btnFinalizarSesion');
+
+        if (btnFinalizar) {
+            btnFinalizar.addEventListener('click', function () {
+
+                const notas = document.getElementById('NotasClinicas')?.value.trim();
+
+                if (!notas || notas.length < 10) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Notas clínicas requeridas',
+                        text: 'Antes de finalizar, registra las notas clínicas de la sesión.',
+                        confirmButtonColor: '#7A4A2E'
+                    });
+                    return;
+                }
+
+                Swal.fire({
+                    title: '¿Finalizar sesión?',
+                    text: 'Después de finalizar, la sesión quedará bloqueada para edición.',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, finalizar',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: '#7A4A2E',
+                    cancelButtonColor: '#6c757d'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('formFinalizarSesion').submit();
+                    }
+                });
+            });
+        }
+
+        const btnGuardarPago = document.getElementById('btnGuardarPago');
+
+        if (btnGuardarPago) {
+            btnGuardarPago.addEventListener('click', function () {
+                const monto = document.getElementById('Monto').value;
+                const metodo = document.getElementById('MetodoPago').value;
+                const estatus = document.getElementById('EstatusPago').value;
+
+                if (!monto || !metodo || !estatus) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Falta información',
+                        text: 'Completa monto, método y estatus.',
+                        confirmButtonColor: '#7A4A2E'
+                    });
+                    return;
+                }
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pago registrado',
+                    text: `Monto: $${monto} · ${metodo} · ${estatus}`,
+                    confirmButtonColor: '#7A4A2E'
+                }).then(() => {
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('modalPago'));
+                    modal.hide();
+                    document.getElementById('formPago').reset();
+                });
+            });
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            cargarPagosSesion();
+        });
+
+        function tokenPago() {
+            return $('#formPago input[name="__RequestVerificationToken"]').val();
+        }
+
+        function cargarPagosSesion() {
+            const sesionId = $('#SesionIdActual').val();
+
+            $.get('/PagosSesion/Listar', { sesionId: sesionId }, function (res) {
+
+                const tbody = $('#tblPagosSesion tbody');
+                tbody.empty();
+
+                if (!res.ok || res.data.length === 0) {
+                    tbody.append(`
+                        <tr>
+                            <td colspan="7" class="text-center text-muted">
+                                Sin pagos registrados.
+                            </td>
+                        </tr>
+                    `);
+                    return;
+                }
+
+                res.data.forEach(p => {
+
+                    let badge = '';
+
+                    if (p.estatusPago === 'Pagado') {
+                        badge = '<span class="badge bg-success">Pagado</span>';
+                    } else if (p.estatusPago === 'Parcial') {
+                        badge = '<span class="badge bg-warning text-dark">Parcial</span>';
+                    } else {
+                        badge = '<span class="badge bg-secondary">Pendiente</span>';
+                    }
+
+                    tbody.append(`
+                        <tr>
+                            <td>${p.fecha}</td>
+                            <td class="fw-semibold">${p.montoTexto}</td>
+                            <td>${p.metodoPago}</td>
+                            <td>${badge}</td>
+                            <td>${p.referencia}</td>
+                            <td>${p.comentarios}</td>
+                            <td class="text-end">
+                                <button type="button"
+                                        class="btn btn-outline-danger btn-sm"
+                                        onclick="eliminarPago(${p.pagoSesionId})">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            });
+        }
+
+        $('#btnGuardarPago').on('click', function () {
+
+            const monto = $('#Monto').val();
+            const metodoPagoId = $('#MetodoPagoId').val();
+            const estatusPagoId = $('#EstatusPagoId').val();
+
+            if (!monto || parseFloat(monto) <= 0) {
+                Swal.fire('Aviso', 'Ingresa un monto válido.', 'warning');
+                return;
+            }
+
+            if (!metodoPagoId) {
+                Swal.fire('Aviso', 'Selecciona un método de pago.', 'warning');
+                return;
+            }
+
+            if (!estatusPagoId) {
+                Swal.fire('Aviso', 'Selecciona un estatus de pago.', 'warning');
+                return;
+            }
+
+            $.ajax({
+                url: '/PagosSesion/Guardar',
+                type: 'POST',
+                data: $('#formPago').serialize(),
+                success: function (res) {
+                    if (res.ok) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Pago registrado',
+                            text: res.mensaje,
+                            confirmButtonColor: '#7A4A2E'
+                        });
+
+                        $('#modalPago').modal('hide');
+                        $('#formPago')[0].reset();
+                        $('#SesionIdPago').val($('#SesionIdActual').val());
+
+                        cargarPagosSesion();
+                    } else {
+                        Swal.fire('Error', res.mensaje, 'error');
+                    }
+                },
+                error: function () {
+                    Swal.fire('Error', 'Ocurrió un error al registrar el pago.', 'error');
+                }
+            });
+        });
+
+        function eliminarPago(id) {
+            Swal.fire({
+                title: '¿Eliminar pago?',
+                text: 'Esta acción no se puede deshacer.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#7A4A2E',
+                cancelButtonColor: '#6c757d'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: '/PagosSesion/Eliminar',
+                        type: 'POST',
+                        data: {
+                            __RequestVerificationToken: tokenPago(),
+                            pagoSesionId: id
+                        },
+                        success: function (res) {
+                            if (res.ok) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Eliminado',
+                                    text: res.mensaje,
+                                    confirmButtonColor: '#7A4A2E'
+                                });
+
+                                cargarPagosSesion();
+                            } else {
+                                Swal.fire('Error', res.mensaje, 'error');
+                            }
+                        },
+                        error: function () {
+                            Swal.fire('Error', 'No se pudo eliminar el pago.', 'error');
+                        }
+                    });
+
+                }
+            });
+        }
+    </script>
+}
+
+

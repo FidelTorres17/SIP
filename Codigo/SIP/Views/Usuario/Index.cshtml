@@ -1,0 +1,260 @@
+﻿@model IEnumerable<SIP.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h2 class="mb-0 text-sip">Usuarios</h2>
+        <small class="text-muted">Administración de cuentas del sistema</small>
+    </div>
+
+    <button type="button" class="btn btn-sip" data-bs-toggle="modal" data-bs-target="#modalUsuario"
+            id="btnNuevoUsuario">
+        <i class="bi bi-person-plus"></i> Nuevo usuario
+    </button>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tblUsuarios" class="table table-hover align-middle w-100">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width:60px;">#</th>
+                        <th>Nombre</th>
+                        @* <th>Usuario</th> *@
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Rol</th>
+                        @* <th>Activo</th> *@
+                        <th class="text-center" style="width:180px;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var i = 1;
+                        foreach (var u in Model)
+                        {
+                            var nombreCompleto = $"{u.Nombre} {u.ApellidoP} {u.ApellidoM}".Trim();
+                            <tr>
+                                <td>@i</td>
+                                <td class="fw-semibold">@nombreCompleto</td>
+                                // <td>@u.UserName</td>
+                                <td>@u.Email</td>
+                                <td>@u.Telefono</td>
+                                <td>
+                                    <span class="badge rounded-pill bg-secondary">
+                                        @u.Rol
+                                    </span>
+                                </td>
+                                @* <td>
+                                     @if (u.Activo)
+                                     {
+                                         <span class="badge rounded-pill bg-success">Activo</span>
+                                     }
+                                     else
+                                     {
+                                         <span class="badge rounded-pill bg-danger">Inactivo</span>
+                                     }
+                                 </td> *@
+
+                                <td class="text-center">
+                                    <button type="button"
+                                            class="btn btn-outline-sip btn-sm btnEditar"
+                                            data-id="@u.UsuarioId"
+                                            data-rol="@u.RolId"
+                                            data-nombre="@u.Nombre"
+                                            data-apellidop="@u.ApellidoP"
+                                            data-apellidom="@u.ApellidoM"
+                                            data-email="@u.Email"
+                                            data-telefono="@u.Telefono"
+                                            data-username="@u.UserName"
+                                            data-password="@u.Password"
+                                            data-activo="@u.Activo">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn btn-outline-danger btn-sm btnEliminar"
+                                            data-id="@u.UsuarioId"
+                                            data-nombre="@nombreCompleto">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== MODAL CREAR / EDITAR ===================== -->
+<div class="modal fade" id="modalUsuario" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header sip-modal-header">
+                <h5 class="modal-title" id="tituloModalUsuario">
+                    <i class="bi bi-person-badge"></i> Usuario
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <div class="modal-body">
+                <!-- IMPORTANTE: tú decides si lo mandas por POST normal o AJAX -->
+                <form id="formUsuario" method="post">
+                    @Html.AntiForgeryToken()
+                    @* <input type="hidden" id="UsuarioId" name="UsuarioId" /> *@
+                    @Html.Hidden("Txt_UsuarioId", "", new { id = "Txt_UsuarioId" })
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Nombre</label>
+                            @* <input class="form-control" id="Nombre" name="Nombre" required /> *@
+                            @Html.TextBox("Txt_Nombre", "", new { @class = "form-control", id = "Txt_Nombre", required = "required" })
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Apellido Paterno</label>
+                            @* <input class="form-control" id="ApellidoP" name="ApellidoP" required /> *@
+                            @Html.TextBox("Txt_ApellidoP", "", new { @class = "form-control", id = "Txt_ApellidoP" })
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Apellido Materno</label>
+                            @* <input class="form-control" id="ApellidoM" name="ApellidoM" /> *@
+                            @Html.TextBox("Txt_ApellidoM", "", new { @class = "form-control", id = "Txt_ApellidoM", required = "required" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Rol</label>
+                            <!-- Si ya tienes catálogo de roles, aquí pones tu combo real -->
+                            @* <select class="form-select" id="RolId" name="RolId" required>
+                                <option value="">Selecciona</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Terapeuta</option>
+                                <option value="3">Asistente</option>
+                            </select> *@
+                            @Html.DropDownList("RolId", null, htmlAttributes: new { @class = "form-select", data_val = "true", data_val_required = "El campo es obligatorio." })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Teléfono</label>
+                           @*  <input class="form-control" id="Telefono" name="Telefono" maxlength="10" /> *@
+                            @Html.TextBox("Txt_Telefono", "", new { @class = "form-control", id = "Txt_Telefono", required = "required" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Email</label>
+                            @* <input class="form-control" id="Email" name="Email" type="email" required /> *@
+                            @Html.TextBox("Txt_Email", "", new { @class = "form-control", id = "Txt_Email", required = "required" })
+                        </div>
+
+                       @*  <div class="col-md-6">
+                            <label class="form-label">Usuario</label>
+                           
+                            @Html.TextBox("Txt_UserName", "", new { @class = "form-control", id = "Txt_UserName", required = "required" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Password</label>
+                            
+                            @Html.TextBox("Txt_Password", "", new { @class = "form-control", id = "Txt_Password", required = "required" })
+                        </div> *@
+
+                        @* <div class="col-12">
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="Activo" name="Activo" value="true">
+                                <label class="form-check-label" for="Activo">Activo</label>
+                            </div>
+                        </div> *@
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <!-- Este botón tú lo conectas a tu POST/AJAX -->
+                <button type="button" class="btn btn-sip" id="btnGuardarUsuario" onclick="guardarUsuario(event)">
+                    <i class="bi bi-save2"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <!-- DataTables (usa tu versión actual o reemplaza por la que tengas) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Si ya tienes los js de datatable en tu layout, puedes quitar estas 2 líneas -->
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+    <script src="~/js/Usuario.js"></script>
+    <script>
+        $(function () {
+            // DataTable
+            $('#tblUsuarios').DataTable({
+                pageLength: 10,
+                order: [[0, 'asc']],
+                language: {
+                    search: "Buscar:",
+                    lengthMenu: "Mostrar _MENU_",
+                    info: "Mostrando _START_ a _END_ de _TOTAL_",
+                    paginate: { previous: "Anterior", next: "Siguiente" },
+                    zeroRecords: "No se encontraron usuarios"
+                }
+            });
+
+           
+
+            
+
+            
+        });
+    </script>
+}
+
+<style>
+    /* Look & Feel SIP */
+    .text-sip {
+        color: #7A4A2E;
+    }
+
+    .btn-sip {
+        background: #7A4A2E;
+        color: #fff;
+        border: none;
+    }
+
+        .btn-sip:hover {
+            background: #5f3722;
+            color: #fff;
+        }
+
+    .btn-outline-sip {
+        border: 1px solid #7A4A2E;
+        color: #7A4A2E;
+    }
+
+        .btn-outline-sip:hover {
+            background: #7A4A2E;
+            color: #fff;
+        }
+
+    .sip-modal-header {
+        background: #F3E6D8;
+        border-bottom: 1px solid #eadfce;
+        color: #3A2416;
+    }
+</style>
+
+

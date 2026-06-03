@@ -1,0 +1,266 @@
+﻿@model ExpedienteEditVm
+
+@{
+    ViewData["Title"] = "Crear expediente";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2 class="text-sip mb-0">
+                <i class="bi bi-folder-plus"></i> Crear expediente clínico
+            </h2>
+
+            <small class="text-muted">
+                El paciente aún no cuenta con expediente activo.
+            </small>
+        </div>
+
+        <a asp-controller="Citas"
+           asp-action="Index"
+           class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+    </div>
+
+    <!-- DATOS -->
+    <div class="card shadow-sm border-0 mb-4">
+
+        <div class="card-header sip-card-header">
+            <i class="bi bi-person-vcard"></i> Datos generales
+        </div>
+
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <label class="form-label">Paciente</label>
+                    <input class="form-control"
+                           value="@Model.PacienteNombre"
+                           readonly />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Terapeuta</label>
+                    <input class="form-control"
+                           value="@Model.TerapeutaNombre"
+                           readonly />
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FORM -->
+    <form asp-controller="Expedientes"
+          asp-action="Crear"
+          method="post"
+          id="formExpediente">
+
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="CitaId" />
+        <input type="hidden" asp-for="PacienteId" />
+        <input type="hidden" asp-for="UsuarioId" />
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-header sip-card-header">
+                <i class="bi bi-journal-medical"></i> Información clínica
+            </div>
+
+            <div class="card-body">
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label asp-for="FechaInicio" class="form-label">
+                            Fecha inicio
+                        </label>
+
+                        <input asp-for="FechaInicio"
+                               type="date"
+                               class="form-control" />
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="MotivoConsulta"
+                               class="form-label">
+                            Motivo de consulta
+                        </label>
+
+                        <textarea asp-for="MotivoConsulta"
+                                  class="form-control"
+                                  rows="3"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="DiagnosticoPreliminar"
+                               class="form-label">
+                            Diagnóstico preliminar
+                        </label>
+
+                        <textarea asp-for="DiagnosticoPreliminar"
+                                  class="form-control"
+                                  rows="3"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="AntecedentesPersonales"
+                               class="form-label">
+                            Antecedentes personales
+                        </label>
+
+                        <textarea asp-for="AntecedentesPersonales"
+                                  class="form-control"
+                                  rows="3"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="AntecedentesFamiliares"
+                               class="form-label">
+                            Antecedentes familiares
+                        </label>
+
+                        <textarea asp-for="AntecedentesFamiliares"
+                                  class="form-control"
+                                  rows="3"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="HistorialMedico"
+                               class="form-label">
+                            Historial médico
+                        </label>
+
+                        <textarea asp-for="HistorialMedico"
+                                  class="form-control"
+                                  rows="3"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Observaciones"
+                               class="form-label">
+                            Observaciones
+                        </label>
+
+                        <textarea asp-for="Observaciones"
+                                  class="form-control"
+                                  rows="3"></textarea>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2">
+
+                <a asp-controller="Citas"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    Cancelar
+                </a>
+
+                <!-- BOTÓN SWEETALERT -->
+                <button type="button"
+                        class="btn btn-sip"
+                        id="btnGuardarExpediente">
+
+                    <i class="bi bi-save2"></i>
+                    Crear expediente e iniciar sesión
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+
+    <!-- SWEETALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- MENSAJES -->
+    @if (TempData["Ok"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Correcto',
+                text: '@TempData["Ok"]',
+                confirmButtonColor: '#7A4A2E'
+            });
+        </script>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '@TempData["Error"]',
+                confirmButtonColor: '#7A4A2E'
+            });
+        </script>
+    }
+
+    <!-- CONFIRMACIÓN -->
+    <script>
+
+        document.getElementById('btnGuardarExpediente')
+            .addEventListener('click', function () {
+
+                const motivo =
+                    document.getElementById('MotivoConsulta').value.trim();
+
+                if (motivo.length < 5) {
+
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Falta información',
+                        text: 'Ingresa un motivo de consulta válido.',
+                        confirmButtonColor: '#7A4A2E'
+                    });
+
+                    return;
+                }
+
+                Swal.fire({
+
+                    title: '¿Crear expediente?',
+                    text: 'Se creará el expediente clínico y se iniciará la sesión.',
+                    icon: 'question',
+
+                    showCancelButton: true,
+
+                    confirmButtonText: 'Sí, continuar',
+                    cancelButtonText: 'Cancelar',
+
+                    confirmButtonColor: '#7A4A2E',
+                    cancelButtonColor: '#6c757d'
+
+                }).then((result) => {
+
+                    if (result.isConfirmed) {
+
+                        document
+                            .getElementById('formExpediente')
+                            .submit();
+                    }
+
+                });
+
+            });
+
+    </script>
+}
+

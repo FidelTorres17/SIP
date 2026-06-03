@@ -1,0 +1,318 @@
+﻿@model IEnumerable<SIP.Models.Paciente>
+
+@{
+    ViewData["Title"] = "Pacientes";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h2 class="mb-0 text-sip">Pacientes</h2>
+        <small class="text-muted">Administración de pacientes</small>
+    </div>
+
+    <button type="button" class="btn btn-sip" data-bs-toggle="modal" data-bs-target="#modalPaciente"
+            id="btnNuevoPaciente">
+        <i class="bi bi-person-plus"></i> Nuevo paciente
+    </button>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tblPacientes" class="table table-hover align-middle w-100">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width:60px;">#</th>
+                        <th>Nombre</th>
+                        <th>Fecha de N.</th>
+                        <th>Sexo</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        @* <th>Activo</th> *@
+                        <th class="text-center" style="width:180px;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var i = 1;
+                        foreach (var u in Model)
+                        {
+                            var nombreCompleto = $"{u.Nombre} {u.ApellidoP} {u.ApellidoM}".Trim();
+                            <tr>
+                                <td>@i</td>
+                                <td class="fw-semibold">@nombreCompleto</td>
+                                <td>@u.FechaNacimiento</td>
+                                <td>@u.Sexo</td>
+                                <td>@u.Telefono</td>
+                                <td>@u.Email</td>
+
+                                <td class="text-center">
+                                    <button type="button">
+                                            class="btn btn-outline-sip btn-sm btnEditar"
+                                            data-id="@u.PacienteId"
+                                            data-nombre="@u.Nombre"
+                                            data-apellidop="@u.ApellidoP"
+                                            data-apellidom="@u.ApellidoM"
+                                        data-fechanacimiento="@(u.FechaNacimiento?.ToString("yyyy-MM-dd") ?? "")"
+                                            data-email="@u.Email"
+                                            data-telefono="@u.Telefono"
+                                            data-sexo="@u.Sexo"
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </button>
+
+                                    @*<button type="button"
+                                            class="btn btn-outline-danger btn-sm btnEliminar"
+                                            data-id="@u.PacienteId"
+                                            data-nombre="@nombreCompleto">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </button>*@
+
+                                    <button type="button"
+                                            class="btn btn-outline-sip btn-sm btnAgendarCita"
+                                            data-id="@u.PacienteId"
+                                            data-nombre="@($"{u.Nombre} {u.ApellidoP} {u.ApellidoM}")">
+                                        <i class="bi bi-calendar-plus"></i> Agendar cita
+                                    </button>
+
+                                    <a asp-controller="Expedientes"
+                                       asp-action="AbrirExpediente"
+                                       asp-route-pacienteId="@u.PacienteId"
+                                       class="btn btn-outline-sip btn-sm">
+
+                                        <i class="bi bi-folder2-open"></i> Expediente
+
+                                    </a>
+
+                                </td>
+                            </tr>
+
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== MODAL PACIENTE ===================== -->
+<div class="modal fade" id="modalPaciente" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0">
+
+            <!-- HEADER -->
+            <div class="modal-header sip-modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-person-hearts"></i> Paciente
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- BODY -->
+            <div class="modal-body">
+                <form id="formPaciente">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="PacienteId" name="PacienteId" />
+
+                    <div class="row g-3">
+
+                        <!-- NOMBRE -->
+                        <div class="col-md-4">
+                            <label class="form-label">Nombre</label>
+                            <input class="form-control" id="Nombre" name="Nombre" required />
+                        </div>
+
+                        <!-- APELLIDO P -->
+                        <div class="col-md-4">
+                            <label class="form-label">Apellido Paterno</label>
+                            <input class="form-control" id="ApellidoP" name="ApellidoP" required />
+                        </div>
+
+                        <!-- APELLIDO M -->
+                        <div class="col-md-4">
+                            <label class="form-label">Apellido Materno</label>
+                            <input class="form-control" id="ApellidoM" name="ApellidoM" />
+                        </div>
+
+                        <!-- FECHA NACIMIENTO -->
+                        <div class="col-md-4">
+                            <label class="form-label">Fecha de nacimiento</label>
+                            <input type="date" class="form-control" id="FechaNacimiento" name="FechaNacimiento" />
+                        </div>
+
+                        <!-- SEXO -->
+                        <div class="col-md-4">
+                            <label class="form-label">Sexo</label>
+                            <select class="form-select" id="Sexo" name="Sexo" required>
+                                <option value="">Selecciona</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <!-- TELEFONO -->
+                        <div class="col-md-4">
+                            <label class="form-label">Teléfono</label>
+                            <input class="form-control" id="Telefono" name="Telefono" maxlength="10" />
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div class="col-md-6">
+                            <label class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="Email" name="Email" />
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <button type="button" class="btn btn-sip" id="btnGuardarPaciente">
+                    <i class="bi bi-save2"></i> Guardar
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ===================== MODAL CITAS ===================== -->
+<div class="modal fade" id="modalCita" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header sip-modal-header">
+                <h5 class="modal-title" id="tituloModalCita">
+                    <i class="bi bi-calendar2-plus"></i> Cita
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="formCita" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="CitaId" name="CitaId" />
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="Fecha" name="Fecha" required />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Hora</label>
+                            <input type="time" class="form-control" id="Hora" name="Hora" required />
+                        </div>
+
+                        <div class="col-md-6">
+                           @*  <label class="form-label">Paciente</label>
+                            <input class="form-control" id="Paciente" name="Paciente" placeholder="(dummy)" required /> *@
+                            <div class="text-muted small">Paciente</div>
+                            <div class="fw-semibold" id="lblPaciente"></div>
+                            <input type="hidden" id="CitaPacienteId" name="PacienteId" />
+                        </div>
+
+                        @* <div class="col-md-6">
+                            <label class="form-label">Terapeuta</label>
+                            <input class="form-control" id="Terapeuta" name="Terapeuta" placeholder="(dummy)" required />
+                        </div> *@
+
+                        <div class="col-md-6">
+                            <label class="form-label">Estatus</label>
+                            <select class="form-select" id="EstatusCitaId" name="EstatusCitaId" required>
+                                <option value="">Selecciona</option>
+                                <option value="1">Pendiente</option>
+                                <option value="2">Confirmada</option>
+                                <option value="3">Cancelada</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Notas</label>
+                            <input class="form-control" id="Notas" name="Notas" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sip" id="btnGuardarCita">
+                    <i class="bi bi-save2"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <!-- DataTables (usa tu versión actual o reemplaza por la que tengas) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Si ya tienes los js de datatable en tu layout, puedes quitar estas 2 líneas -->
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+    <script src="~/js/Paciente.js"></script>
+    <script>
+        $(function () {
+            // DataTable
+            $('#tblPacientes').DataTable({
+                pageLength: 10,
+                order: [[0, 'asc']],
+                language: {
+                    search: "Buscar:",
+                    lengthMenu: "Mostrar _MENU_",
+                    info: "Mostrando _START_ a _END_ de _TOTAL_",
+                    paginate: { previous: "Anterior", next: "Siguiente" },
+                    zeroRecords: "No se encontraron usuarios"
+                }
+            });
+
+
+
+
+
+
+        });
+    </script>
+}
+
+<style>
+    /* Look & Feel SIP */
+    .text-sip {
+        color: #7A4A2E;
+    }
+
+    .btn-sip {
+        background: #7A4A2E;
+        color: #fff;
+        border: none;
+    }
+
+        .btn-sip:hover {
+            background: #5f3722;
+            color: #fff;
+        }
+
+    .btn-outline-sip {
+        border: 1px solid #7A4A2E;
+        color: #7A4A2E;
+    }
+
+        .btn-outline-sip:hover {
+            background: #7A4A2E;
+            color: #fff;
+        }
+
+    .sip-modal-header {
+        background: #F3E6D8;
+        border-bottom: 1px solid #eadfce;
+        color: #3A2416;
+    }
+</style>

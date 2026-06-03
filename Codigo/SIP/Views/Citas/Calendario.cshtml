@@ -1,0 +1,164 @@
+﻿@model CalendarioCitasVm
+
+@{
+    ViewData["Title"] = "Calendario de citas";
+}
+
+<div class="container-fluid mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2 class="text-sip mb-0">
+                <i class="bi bi-calendar2-week"></i> Calendario de citas
+            </h2>
+            <small class="text-muted">Agenda visual de citas del SIP</small>
+        </div>
+
+        <a asp-controller="Citas" asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-list"></i> Ver listado
+        </a>
+    </div>
+
+    @if (Model.EsAdmin)
+    {
+        <div class="card shadow-sm border-0 mb-3">
+            <div class="card-body">
+                <div class="row g-2 align-items-end">
+                    <div class="col-md-4">
+                        <label class="form-label">Filtrar por terapeuta</label>
+                        <select id="filtroTerapeuta" class="form-select">
+                            <option value="">Todos los terapeutas</option>
+                            @foreach (var t in Model.Terapeutas)
+                            {
+                                <option value="@t.Value">@t.Text</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="button" id="btnLimpiarFiltro" class="btn btn-outline-secondary w-100">
+                            Limpiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <div id="calendar"></div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const calendarEl = document.getElementById('calendar');
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek',
+                locale: 'es',
+                height: 'auto',
+                nowIndicator: true,
+
+                slotMinTime: '08:00:00',
+                slotMaxTime: '20:00:00',
+                slotDuration: '00:15:00',
+                allDaySlot: false,
+
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+
+                buttonText: {
+                    today: 'Hoy',
+                    month: 'Mes',
+                    week: 'Semana',
+                    day: 'Día'
+                },
+
+                events: function (fetchInfo, successCallback, failureCallback) {
+
+                    const filtro = document.getElementById('filtroTerapeuta');
+                    const usuarioId = filtro ? filtro.value : '';
+
+                    fetch(`/Citas/CalendarioData?usuarioId=${usuarioId}`)
+                        .then(r => r.json())
+                        .then(data => successCallback(data))
+                        .catch(error => failureCallback(error));
+                },
+
+                eventClick: function (info) {
+                    const citaId = info.event.extendedProps.citaId || info.event.id;
+                    const expedienteId = info.event.extendedProps.expedienteId;
+                    const estatus = info.event.extendedProps.estatus || '-';
+                    const notas = info.event.extendedProps.notas || '-';
+
+                    let botonesHtml = `
+                        <div class="d-grid gap-2 mt-3">
+                            <a href="/Sesiones/Iniciar?citaId=${citaId}" class="btn btn-sip">
+                                <i class="bi bi-play-circle"></i> Iniciar sesión
+                            </a>
+                    `;
+
+                    if (expedienteId) {
+                        botonesHtml += `
+                            <a href="/Expedientes/Detalle/${expedienteId}" class="btn btn-outline-sip">
+                                <i class="bi bi-folder2-open"></i> Ver expediente
+                            </a>
+                        `;
+                    }
+
+                    botonesHtml += `
+                            <a href="/Citas/Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-list"></i> Ir al listado
+                            </a>
+                        </div>
+                    `;
+
+                    Swal.fire({
+                        title: info.event.title,
+                        html: `
+                            <div class="text-start">
+                                <b>Inicio:</b> ${info.event.start.toLocaleString()}<br>
+                                <b>Estatus:</b> ${estatus}<br>
+                                <b>Notas:</b> ${notas}
+                                ${botonesHtml}
+                            </div>
+                        `,
+                        showConfirmButton: false,
+                        showCloseButton: true,
+                        width: 520
+                    });
+                }
+            });
+
+            calendar.render();
+
+            const filtro = document.getElementById('filtroTerapeuta');
+            if (filtro) {
+                filtro.addEventListener('change', function () {
+                    calendar.refetchEvents();
+                });
+            }
+
+            const btnLimpiar = document.getElementById('btnLimpiarFiltro');
+            if (btnLimpiar) {
+                btnLimpiar.addEventListener('click', function () {
+                    document.getElementById('filtroTerapeuta').value = '';
+                    calendar.refetchEvents();
+                });
+            }
+        });
+    </script>
+}

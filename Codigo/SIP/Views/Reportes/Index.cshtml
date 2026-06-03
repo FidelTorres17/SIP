@@ -1,0 +1,232 @@
+﻿@model ReporteIndexVm
+
+@{
+    ViewData["Title"] = "Reportes";
+}
+
+<div class="container-fluid mt-4">
+
+    <div class="mb-3">
+        <h2 class="text-sip mb-0">
+            <i class="bi bi-bar-chart-line"></i> Reportes
+        </h2>
+        <small class="text-muted">
+            Consulta de sesiones realizadas y reporte financiero por periodo.
+        </small>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <form asp-controller="Reportes" asp-action="Index" method="get">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label">Fecha inicio</label>
+                        <input type="date" name="fechaInicio" class="form-control"
+                               value="@Model.FechaInicio.ToString("yyyy-MM-dd")" />
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Fecha fin</label>
+                        <input type="date" name="fechaFin" class="form-control"
+                               value="@Model.FechaFin.ToString("yyyy-MM-dd")" />
+                    </div>
+
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-sip w-100">
+                            <i class="bi bi-search"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <ul class="nav nav-pills mb-3">
+        <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tabSesiones" type="button">
+                <i class="bi bi-journal-medical"></i> Sesiones realizadas
+            </button>
+        </li>
+
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabFinanciero" type="button">
+                <i class="bi bi-cash-coin"></i> Reporte financiero
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+
+        <!-- SESIONES -->
+        <div class="tab-pane fade show active" id="tabSesiones">
+            <div class="row g-3 mb-3">
+                <div class="col-md-4">
+                    <div class="p-3 bg-light border rounded-3">
+                        <small class="text-muted">Total de sesiones</small>
+                        <h4 class="mb-0">@Model.TotalSesiones</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="p-3 bg-light border rounded-3">
+                        <small class="text-muted">Pacientes atendidos</small>
+                        <h4 class="mb-0">@Model.PacientesAtendidos</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="p-3 bg-light border rounded-3">
+                        <small class="text-muted">Duración promedio</small>
+                        <h4 class="mb-0">@Model.DuracionPromedio min</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header sip-card-header">
+                    <i class="bi bi-table"></i> Detalle de sesiones
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Paciente</th>
+                                    <th>Terapeuta</th>
+                                    <th>Motivo</th>
+                                    <th>Diagnóstico</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Sesiones.Any())
+                                {
+                                    foreach (var s in Model.Sesiones)
+                                    {
+                                        <tr>
+                                            <td>@s.Fecha.ToString("dd/MM/yyyy hh:mm tt")</td>
+                                            <td>@s.Paciente</td>
+                                            <td>@s.Terapeuta</td>
+                                            <td>@(string.IsNullOrWhiteSpace(s.Motivo) ? "-" : s.Motivo)</td>
+                                            <td>@(string.IsNullOrWhiteSpace(s.Diagnostico) ? "-" : s.Diagnostico)</td>
+                                            <td>
+                                                @if (s.EstadoSesion == "Finalizada")
+                                                {
+                                                    <span class="badge bg-success">Finalizada</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning text-dark">@s.EstadoSesion</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">
+                                            No hay sesiones en este periodo.
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FINANCIERO -->
+        <div class="tab-pane fade" id="tabFinanciero">
+            <div class="row g-3 mb-3">
+                <div class="col-md-4">
+                    <div class="p-3 bg-light border rounded-3">
+                        <small class="text-muted">Total ingresos</small>
+                        <h4 class="mb-0">$ @Model.TotalIngresos.ToString("N2")</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="p-3 bg-light border rounded-3">
+                        <small class="text-muted">Pagado / parcial</small>
+                        <h4 class="mb-0 text-success">$ @Model.TotalPagado.ToString("N2")</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="p-3 bg-light border rounded-3">
+                        <small class="text-muted">Pendiente</small>
+                        <h4 class="mb-0 text-danger">$ @Model.TotalPendiente.ToString("N2")</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header sip-card-header">
+                    <i class="bi bi-table"></i> Detalle financiero
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Fecha pago</th>
+                                    <th>Paciente</th>
+                                    <th>Sesión</th>
+                                    <th>Monto</th>
+                                    <th>Método</th>
+                                    <th>Estatus</th>
+                                    <th>Referencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Finanzas.Any())
+                                {
+                                    foreach (var f in Model.Finanzas)
+                                    {
+                                        <tr>
+                                            <td>@f.FechaPago.ToString("dd/MM/yyyy hh:mm tt")</td>
+                                            <td>@f.Paciente</td>
+                                            <td>Sesión #@f.SesionId</td>
+                                            <td class="fw-semibold">$ @f.Monto.ToString("N2")</td>
+                                            <td>@f.MetodoPago</td>
+                                            <td>
+                                                @if (f.EstatusPago == "Pagado")
+                                                {
+                                                    <span class="badge bg-success">Pagado</span>
+                                                }
+                                                else if (f.EstatusPago == "Parcial")
+                                                {
+                                                    <span class="badge bg-warning text-dark">Parcial</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">@f.EstatusPago</span>
+                                                }
+                                            </td>
+                                            <td>@(string.IsNullOrWhiteSpace(f.Referencia) ? "-" : f.Referencia)</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7" class="text-center text-muted">
+                                            No hay pagos en este periodo.
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

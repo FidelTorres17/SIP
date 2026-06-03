@@ -1,0 +1,325 @@
+﻿@model ExpedienteDetalleVm
+
+@{
+    ViewData["Title"] = "Detalle expediente";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2 class="text-sip mb-0">
+                <i class="bi bi-folder2-open"></i> Expediente clínico
+            </h2>
+            <small class="text-muted">Historial clínico y administrativo del paciente</small>
+        </div>
+
+        <a asp-controller="Pacientes" asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header sip-card-header d-flex justify-content-between">
+            <span><i class="bi bi-person-vcard"></i> Datos del paciente</span>
+            <span class="badge bg-light text-sip border">Expediente #@Model.ExpedienteId</span>
+        </div>
+
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <small class="text-muted">Paciente</small>
+                    <div class="fw-semibold">@Model.NombrePaciente</div>
+                </div>
+
+                <div class="col-md-2">
+                    <small class="text-muted">Edad</small>
+                    <div class="fw-semibold">@Model.Edad</div>
+                </div>
+
+                <div class="col-md-2">
+                    <small class="text-muted">Sexo</small>
+                    <div class="fw-semibold">@Model.Sexo</div>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-muted">Terapeuta</small>
+                    <div class="fw-semibold">@Model.TerapeutaNombre</div>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-muted">Teléfono</small>
+                    <div class="fw-semibold">@Model.Telefono</div>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-muted">Correo</small>
+                    <div class="fw-semibold">@Model.Email</div>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="text-muted">Fecha inicio</small>
+                    <div class="fw-semibold">@Model.FechaInicio.ToString("dd/MM/yyyy")</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav nav-pills mb-3" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tabClinico" type="button">
+                <i class="bi bi-journal-medical"></i> Información clínica
+            </button>
+        </li>
+
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabCitas" type="button">
+                <i class="bi bi-calendar2-week"></i> Citas
+            </button>
+        </li>
+
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabSesiones" type="button">
+                <i class="bi bi-clipboard2-heart"></i> Sesiones
+            </button>
+        </li>
+
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabPagos" type="button">
+                <i class="bi bi-cash-coin"></i> Pagos
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+
+        <!-- INFORMACIÓN CLÍNICA -->
+        <div class="tab-pane fade show active" id="tabClinico">
+            <div class="card shadow-sm border-0">
+                <div class="card-header sip-card-header">
+                    <i class="bi bi-journal-medical"></i> Información clínica
+                </div>
+
+                <div class="card-body">
+                    <p><b>Motivo de consulta:</b> @(Model.MotivoConsulta ?? "Sin información")</p>
+                    <p><b>Diagnóstico preliminar:</b> @(Model.DiagnosticoPreliminar ?? "Sin información")</p>
+                    <p><b>Antecedentes personales:</b> @(Model.AntecedentesPersonales ?? "Sin información")</p>
+                    <p><b>Antecedentes familiares:</b> @(Model.AntecedentesFamiliares ?? "Sin información")</p>
+                    <p><b>Historial médico:</b> @(Model.HistorialMedico ?? "Sin información")</p>
+                    <p><b>Observaciones:</b> @(Model.Observaciones ?? "Sin información")</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CITAS -->
+        <div class="tab-pane fade" id="tabCitas">
+            <div class="card shadow-sm border-0">
+                <div class="card-header sip-card-header">
+                    <i class="bi bi-calendar2-week"></i> Citas del expediente
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Terapeuta</th>
+                                    <th>Estatus</th>
+                                    <th>Notas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Citas != null && Model.Citas.Any())
+                                {
+                                    foreach (var c in Model.Citas)
+                                    {
+                                        <tr>
+                                            <td>@c.FechaHora.ToString("dd/MM/yyyy hh:mm tt")</td>
+                                            <td>@c.Terapeuta</td>
+                                            <td>
+                                                <span class="badge bg-secondary">@c.Estatus</span>
+                                            </td>
+                                            <td>@(string.IsNullOrWhiteSpace(c.Notas) ? "-" : c.Notas)</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">
+                                            No hay citas registradas.
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SESIONES -->
+        <div class="tab-pane fade" id="tabSesiones">
+            <div class="card shadow-sm border-0">
+                <div class="card-header sip-card-header">
+                    <i class="bi bi-clipboard2-heart"></i> Sesiones del expediente
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Terapeuta</th>
+                                    <th>Motivo</th>
+                                    <th>Diagnóstico</th>
+                                    <th>Estado</th>
+                                    <th class="text-end">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Sesiones != null && Model.Sesiones.Any())
+                                {
+                                    foreach (var s in Model.Sesiones)
+                                    {
+                                        <tr>
+                                            <td>@s.Fecha.ToString("dd/MM/yyyy hh:mm tt")</td>
+                                            <td>@s.Terapeuta</td>
+                                            <td>@(string.IsNullOrWhiteSpace(s.Motivo) ? "-" : s.Motivo)</td>
+                                            <td>@(string.IsNullOrWhiteSpace(s.Diagnostico) ? "-" : s.Diagnostico)</td>
+                                            <td>
+                                                @if (s.EstadoSesion == "Finalizada")
+                                                {
+                                                    <span class="badge bg-success">Finalizada</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning text-dark">@s.EstadoSesion</span>
+                                                }
+                                            </td>
+                                            <td class="text-end">
+                                                <a asp-controller="Sesiones"
+                                                   asp-action="Editar"
+                                                   asp-route-id="@s.SesionId"
+                                                   class="btn btn-outline-sip btn-sm">
+                                                    <i class="bi bi-eye"></i> Ver
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">
+                                            No hay sesiones registradas.
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGOS -->
+        <div class="tab-pane fade" id="tabPagos">
+            <div class="card shadow-sm border-0">
+                <div class="card-header sip-card-header">
+                    <i class="bi bi-cash-coin"></i> Pagos del expediente
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <div class="p-3 rounded-3 bg-light border">
+                                <small class="text-muted">Total pagado / parcial</small>
+                                <div class="fs-5 fw-semibold text-success">
+                                    $ @Model.TotalPagado.ToString("N2")
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="p-3 rounded-3 bg-light border">
+                                <small class="text-muted">Pendiente registrado</small>
+                                <div class="fs-5 fw-semibold text-danger">
+                                    $ @Model.TotalPendiente.ToString("N2")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Fecha pago</th>
+                                    <th>Sesión</th>
+                                    <th>Fecha sesión</th>
+                                    <th>Monto</th>
+                                    <th>Método</th>
+                                    <th>Estatus</th>
+                                    <th>Referencia</th>
+                                    <th>Comentarios</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Pagos != null && Model.Pagos.Any())
+                                {
+                                    foreach (var p in Model.Pagos)
+                                    {
+                                        <tr>
+                                            <td>@p.Fecha.ToString("dd/MM/yyyy hh:mm tt")</td>
+                                            <td>
+                                                <a asp-controller="Sesiones"
+                                                   asp-action="Editar"
+                                                   asp-route-id="@p.SesionId"
+                                                   class="btn btn-outline-sip btn-sm">
+                                                    Sesión #@p.SesionId
+                                                </a>
+                                            </td>
+                                            <td>@p.FechaSesion.ToString("dd/MM/yyyy hh:mm tt")</td>
+                                            <td class="fw-semibold">$ @p.Monto.ToString("N2")</td>
+                                            <td>@p.MetodoPago</td>
+                                            <td>
+                                                @if (p.EstatusPago == "Pagado")
+                                                {
+                                                    <span class="badge bg-success">Pagado</span>
+                                                }
+                                                else if (p.EstatusPago == "Parcial")
+                                                {
+                                                    <span class="badge bg-warning text-dark">Parcial</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">@p.EstatusPago</span>
+                                                }
+                                            </td>
+                                            <td>@(string.IsNullOrWhiteSpace(p.Referencia) ? "-" : p.Referencia)</td>
+                                            <td>@(string.IsNullOrWhiteSpace(p.Comentarios) ? "-" : p.Comentarios)</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="8" class="text-center text-muted">
+                                            No hay pagos registrados para este expediente.
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

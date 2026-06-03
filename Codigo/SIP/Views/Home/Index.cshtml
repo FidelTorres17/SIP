@@ -1,0 +1,240 @@
+﻿@model DashboardVm
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // tu layout principal SIP
+}
+
+<div class="mb-3">
+    <h2 class="text-sip fw-bold mb-1">Bienvenida, @Model.NombreUsuario 👋</h2>
+    <p class="text-muted mb-0">Resumen general del Sistema Integral en Psicoterapia</p>
+</div>
+
+<!-- Cards KPI -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card sip-kpi shadow-sm border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <div class="text-muted small">Pacientes</div>
+                        <div class="h3 mb-0 fw-bold">@Model.TotalPacientes</div>
+                        <div class="small text-muted">registrados</div>
+                    </div>
+                    <div class="sip-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card sip-kpi shadow-sm border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <div class="text-muted small">Citas hoy</div>
+                        <div class="h3 mb-0 fw-bold">@Model.CitasHoy</div>
+                        <div class="small text-muted">agendadas</div>
+                    </div>
+                    <div class="sip-icon">
+                        <i class="bi bi-calendar-heart"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card sip-kpi shadow-sm border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <div class="text-muted small">Sesiones</div>
+                        <div class="h3 mb-0 fw-bold">@Model.SesionesSemana</div>
+                        <div class="small text-muted">esta semana</div>
+                    </div>
+                    <div class="sip-icon">
+                        <i class="bi bi-journal-text"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card sip-kpi shadow-sm border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <div class="text-muted small">Pagos</div>
+                        <div class="h3 mb-0 fw-bold">$@Model.PagosMes.ToString("N2")</div>
+                        <div class="small text-muted">mes actual</div>
+                    </div>
+                    <div class="sip-icon">
+                        <i class="bi bi-cash-coin"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Accesos rápidos -->
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="card dashboard-panel h-100">
+
+            <div class="card-header bg-white border-0">
+                <h6 class="text-sip fw-bold mb-0">
+                    <i class="bi bi-pie-chart"></i>
+                    Distribución de citas
+                </h6>
+            </div>
+
+            <div class="card-body d-flex justify-content-center align-items-center">
+
+                <div style="width:250px;height:250px;">
+                    <canvas id="chartEstatusCitas"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Próximas citas -->
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+                <span class="fw-semibold text-sip">Próximas citas</span>
+                <a asp-controller="Citas" asp-action="Index" class="small text-decoration-none" style="color:#7A4A2E;">
+                    Ver todas
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <table class="table mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Hora</th>
+                            <th>Paciente</th>
+                            <th>Tipo</th>
+                            <th class="text-end">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ProximasCitas.Any())
+                        {
+                            foreach (var c in Model.ProximasCitas)
+                            {
+                                <tr>
+                                    <td class="fw-semibold">@c.FechaHora.ToString("hh:mm tt")</td>
+                                    <td>@c.Paciente</td>
+                                    <td>@c.Tipo</td>
+                                    <td class="text-end">
+                                        @if (c.Estado == "Pendiente")
+                                        {
+                                            <span class="badge bg-warning text-dark">Pendiente</span>
+                                        }
+                                        else if (c.Estado == "Confirmada")
+                                        {
+                                            <span class="badge bg-success">Confirmada</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">@c.Estado</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" class="text-center text-muted">
+                                    No hay próximas citas.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Nota rápida / Tips -->
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <div class="d-flex gap-3 align-items-start">
+            <div class="sip-tip-icon">
+                <i class="bi bi-lightbulb"></i>
+            </div>
+            <div>
+                <div class="fw-semibold text-sip">Tip del día</div>
+                <div class="text-muted">
+                    Mantén tus notas clínicas claras y breves. SIP te ayudará a registrar avances de forma ordenada por sesión.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        const labelsEstatus =
+            @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.EstatusCitasLabels));
+
+        const dataEstatus =
+            @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.EstatusCitasData));
+
+        const ctxEstatus =
+            document.getElementById('chartEstatusCitas');
+
+        new Chart(ctxEstatus, {
+
+            type: 'doughnut',
+
+            data: {
+
+                labels: labelsEstatus,
+
+                datasets: [{
+                    data: dataEstatus,
+
+                    backgroundColor: [
+                        '#C9A227',
+                        '#2E8B57',
+                        '#B04A3A',
+                        '#7A4A2E'
+                    ],
+
+                    borderWidth: 0
+                }]
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                cutout: '60%',
+
+                plugins: {
+
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+    </script>
+
+}

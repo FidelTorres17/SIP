@@ -1,0 +1,186 @@
+﻿@model List<Cita>
+@{
+    ViewData["Title"] = "Citas";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0 text-sip">
+        <i class="bi bi-calendar2-week"></i> Citas
+    </h3>
+  @*   <button class="btn btn-sip" id="btnNuevaCita">
+        <i class="bi bi-plus-circle"></i> Nueva cita
+    </button> *@
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tblCitas" class="table table-sm align-middle w-100">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha / Hora</th>
+                        <th>Paciente</th>
+                        <th>Terapeuta</th>
+                        <th>Estatus</th>
+                        <th>Notas</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var (c, idx) in Model.Select((x, i) => (x, i + 1)))
+                    {
+                        <tr>
+                            <td>@idx</td>
+                            <td>
+                                <div class="fw-semibold">@c.FechaHora?.ToString("dd/MM/yyyy")</div>
+                                <div class="text-muted small">@c.FechaHora?.ToString("hh:mm tt")</div>
+                            </td>
+                            <td>@c.Paciente</td>
+                            <td>@c.Terapeuta</td>
+                            <td>
+                                @* badge base, luego lo cambiamos por ajax *@
+                                @if (c.Estatus == "Pendiente")
+                                {
+                                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill badge-estado">Pendiente</span>
+                                }
+                                else if (c.Estatus == "Confirmada")
+                                {
+                                    <span class="badge bg-success px-3 py-2 rounded-pill badge-estado">Confirmada</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger px-3 py-2 rounded-pill badge-estado">Cancelada</span>
+                                }
+                            </td>
+                            <td class="text-muted">@c.Notas</td>
+                            <td class="text-center">
+                                <button class="btn btn-outline-success btn-sm mb-1 btnConfirmar"
+                                        data-id="@c.CitaId">
+                                    <i class="bi bi-check2-circle"></i> Confirmar
+                                </button>
+
+                                <button class="btn btn-outline-secondary btn-sm mb-1 btnEditar"
+                                        data-id="@c.CitaId"
+                                        data-fecha="@c.FechaHora?.ToString("yyyy-MM-dd")"
+                                        data-hora="@c.FechaHora?.ToString("HH:mm")"
+                                        data-notas="@c.Notas"
+                                        data-estatusid="@c.EstatusCitaId">
+                                    <i class="bi bi-pencil-square"></i> Editar
+                                </button>
+
+                                <button class="btn btn-outline-danger btn-sm mb-1 btnCancelar"
+                                        data-id="@c.CitaId">
+                                    <i class="bi bi-x-circle"></i> Cancelar
+                                </button>
+
+                                <a class="btn btn-outline-primary btn-sm mb-1"
+                                   href="@Url.Action("Iniciar", "Sesiones", new { citaId = c.CitaId })"
+                                   title="Iniciar sesión clínica">
+                                    <i class="bi bi-play-circle"></i> Iniciar sesión
+                                </a>
+
+                                <a asp-controller="Expedientes"
+                                   asp-action="Detalle"
+                                   asp-route-id="@c.ExpedienteId"
+                                   class="btn btn-outline-sip btn-sm mb-1">
+                                    <i class="bi bi-folder2-open"></i> Expediente
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== MODAL CITAS ===================== -->
+<div class="modal fade" id="modalCita" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header sip-modal-header">
+                <h5 class="modal-title" id="tituloModalCita">
+                    <i class="bi bi-calendar2-plus"></i> Cita
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="formCita" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="CitaId" name="CitaId" />
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="Fecha" name="Fecha" required />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Hora</label>
+                            <input type="time" class="form-control" id="Hora" name="Hora" required />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Paciente</label>
+                            <input class="form-control" id="Paciente" name="Paciente" placeholder="(dummy)" required />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Terapeuta</label>
+                            <input class="form-control" id="Terapeuta" name="Terapeuta" placeholder="(dummy)" required />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Estatus</label>
+                            <select class="form-select" id="EstatusCitaId" name="EstatusCitaId" required>
+                                <option value="">Selecciona</option>
+                                <option value="1">Pendiente</option>
+                                <option value="2">Confirmada</option>
+                                <option value="3">Cancelada</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Notas</label>
+                            <input class="form-control" id="Notas" name="Notas" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sip" id="btnGuardarCita">
+                    <i class="bi bi-save2"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- DataTables (usa tu versión actual o reemplaza por la que tengas) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Si ya tienes los js de datatable en tu layout, puedes quitar estas 2 líneas -->
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+    <script>
+        let tablaCitas;
+
+        $(function(){
+            tablaCitas = $('#tblCitas').DataTable({
+                pageLength: 10,
+                order: [],
+                language: { url: "//cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" }
+            });
+
+           
+        });
+    </script>
+}
+
+

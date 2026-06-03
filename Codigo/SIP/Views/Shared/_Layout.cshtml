@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - SIP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Iconos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos SIP -->
+    <link href="~/css/sip.css" rel="stylesheet" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+</head>
+<body class="sip-bg">
+
+    <!-- HEADER -->
+    <nav class="navbar sip-navbar px-4">
+        <div class="d-flex align-items-center">
+            <img src="~/img/logo.png" height="42" class="me-2" />
+            <span class="sip-title">SIP</span>
+        </div>
+
+        <div class="dropdown">
+            <a class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle"></i> @User.Identity?.Name
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <a class="dropdown-item"
+                       asp-controller="Auth"
+                       asp-action="CambiarPassword">
+                        <i class="bi bi-key me-1"></i> Cambiar contraseña
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <form asp-controller="Auth" asp-action="Logout" method="post" class="px-3">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="dropdown-item text-danger">
+                            Cerrar sesión
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CUERPO -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- SIDEBAR -->
+            <aside class="col-md-2 sip-sidebar p-0">
+                <ul class="nav flex-column py-4">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">
+                            <i class="bi bi-speedometer2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Paciente" asp-action="Index">
+                            <i class="bi bi-person-heart"></i> Pacientes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Citas" asp-action="Index">
+                            <i class="bi bi-calendar-heart"></i> Citas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Citas" asp-action="Calendario" class="nav-link">
+                            <i class="bi bi-calendar2-week"></i> Calendario
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Expedientes" asp-action="Index">
+                            <i class="bi bi-journal-text"></i> Expedientes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Reportes" asp-action="Index">
+                            <i class="bi bi-bar-chart-line-fill"></i> Reportes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Usuario" asp-action="Index">
+                            <i class="bi bi-people"></i> Usuarios
+                        </a>
+                    </li>
+                    @* <li class="nav-item">
+                        <a class="nav-link" asp-controller="Sesiones" asp-action="Index">
+                            <i class="bi bi-journal-text"></i> Sesiones
+                        </a>
+                    </li>
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Pagos" asp-action="Index">
+                            <i class="bi bi-cash-coin"></i> Pagos
+                        </a>
+                    </li> *@
+                </ul>
+            </aside>
+
+            <!-- CONTENIDO -->
+            <main class="col-md-10 sip-content p-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="sip-footer text-center py-3">
+        SIP · Sistema Integral en Psicoterapia © @DateTime.Now.Year
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

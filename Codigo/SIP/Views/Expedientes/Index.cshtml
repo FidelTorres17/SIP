@@ -1,0 +1,94 @@
+﻿@model List<SIP.Models.ExpedienteIndexVm>
+@{
+    ViewData["Title"] = "Expedientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2 class="text-sip mb-0">
+                <i class="bi bi-folder2-open"></i> Expedientes clínicos
+            </h2>
+            <div class="text-muted small">
+                Historial completo de pacientes y sesiones.
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="card shadow-sm border-0">
+        <div class="card-header sip-card-header">
+            <div class="fw-semibold"><i class="bi bi-table"></i> Lista de expedientes</div>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="tblExpedientes" class="table table-sm align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Edad</th>
+                            <th>Sexo</th>
+                            <th>Terapeuta</th>
+                            <th>Total sesiones</th>
+                            <th>Última sesión</th>
+                            <th>Estatus</th>
+                            <th class="text-end">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var e in Model)
+                        {
+                            <tr>
+                                <td class="fw-semibold">@e.NombrePaciente</td>
+                                <td>@e.Edad</td>
+                                <td>@e.Sexo</td>
+                                <td>@e.Terapeuta</td>
+                                <td>@e.TotalSesiones</td>
+                                <td>@e.UltimaSesionTexto</td>
+                                <td>
+                                    @if (e.Estatus == "Activo")
+                                    {
+                                        <span class="badge bg-success">Activo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">@e.Estatus</span>
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    <a asp-controller="Expedientes"
+                                       asp-action="Detalle"
+                                       asp-route-id="@e.ExpedienteId"
+                                       class="btn btn-outline-sip btn-sm">
+                                        <i class="bi bi-eye"></i> Ver expediente
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- DataTable -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tblExpedientes').DataTable({
+                pageLength: 10,
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json"
+                }
+            });
+        });
+    </script>
+}
+
+

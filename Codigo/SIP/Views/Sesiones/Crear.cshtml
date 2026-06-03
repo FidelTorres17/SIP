@@ -1,0 +1,309 @@
+﻿@model SIP.Models.SesionEditVm
+@{
+    ViewData["Title"] = "Sesión";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // o tu layout SIP
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <div>
+            <h2 class="mb-0 text-sip">
+                <i class="bi bi-journal-medical"></i> Iniciar sesión clínica
+            </h2>
+            <div class="text-muted small">
+                Completa la información de la sesión (1 cita = 1 sesión).
+            </div>
+        </div>
+
+        <a asp-controller="Citas" asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+    </div>
+
+    @* Mensajes *@
+    @if (TempData["Ok"] != null)
+    {
+        <div class="alert alert-success">@TempData["Ok"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <form asp-controller="Sesiones" asp-action="Crear" method="post" id="formSesion">
+        @Html.AntiForgeryToken()
+
+        @* Hidden keys *@
+        <input type="hidden" asp-for="SesionId" />
+        <input type="hidden" asp-for="CitaId" />
+        <input type="hidden" asp-for="UsuarioId" />
+        <input type="hidden" asp-for="ExpedienteId" />
+
+        <!-- ==================== Card info de la cita (solo lectura) ==================== -->
+        <div class="card shadow-sm mb-4 border-0">
+            <div class="card-header sip-card-header">
+                <div class="fw-semibold">
+                    <i class="bi bi-calendar2-check"></i> Datos de la cita
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Paciente</label>
+                        <input class="form-control" value="@Model.PacienteNombre" readonly />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Terapeuta</label>
+                        <input class="form-control" value="@Model.TerapeutaNombre" readonly />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Fecha y hora</label>
+                        <input class="form-control" value="@Model.FechaHora" readonly />
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Notas de la cita (opcional)</label>
+                        <textarea class="form-control" rows="2" readonly>@Model.NotasCita</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== Card Sesión ==================== -->
+        <div class="card shadow-sm border-0">
+            <div class="card-header sip-card-header">
+                <div class="fw-semibold">
+                    <i class="bi bi-clipboard2-heart"></i> Detalle de sesión
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label asp-for="Motivo" class="form-label">Motivo</label>
+                        <input asp-for="Motivo" class="form-control" placeholder="Ej. ansiedad, estrés, duelo..." />
+                        <span asp-validation-for="Motivo" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Diagnostico" class="form-label">Diagnóstico (opcional)</label>
+                        <input asp-for="Diagnostico" class="form-control" placeholder="Ej. diagnóstico preliminar..." />
+                        <span asp-validation-for="Diagnostico" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="NotasClinicas" class="form-label">Notas clínicas</label>
+                        <textarea asp-for="NotasClinicas" class="form-control" rows="5"
+                                  placeholder="Observaciones, evolución, intervención, acuerdos..."></textarea>
+                        <span asp-validation-for="NotasClinicas" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Recomendaciones" class="form-label">Recomendaciones</label>
+                        <textarea asp-for="Recomendaciones" class="form-control" rows="3"
+                                  placeholder="Tareas, ejercicios, hábitos, seguimiento..."></textarea>
+                        <span asp-validation-for="Recomendaciones" class="text-danger small"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ==================== Card Pagos ==================== -->
+            <div class="card shadow-sm border-0 mt-4">
+                <div class="card-header sip-card-header d-flex justify-content-between align-items-center">
+                    <div class="fw-semibold">
+                        <i class="bi bi-cash-coin"></i> Pagos de la sesión
+                    </div>
+
+                    <button type="button" class="btn btn-outline-sip btn-sm" data-bs-toggle="modal" data-bs-target="#modalPago">
+                        <i class="bi bi-plus-circle"></i> Registrar pago
+                    </button>
+                </div>
+
+                <div class="card-body">
+                    <!-- Resumen (dummy) -->
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-4">
+                            <div class="p-3 rounded-3 bg-light border">
+                                <div class="text-muted small">Total sesión</div>
+                                <div class="fs-5 fw-semibold">$ 600.00</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 rounded-3 bg-light border">
+                                <div class="text-muted small">Pagado</div>
+                                <div class="fs-5 fw-semibold text-success">$ 300.00</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 rounded-3 bg-light border">
+                                <div class="text-muted small">Saldo</div>
+                                <div class="fs-5 fw-semibold text-danger">$ 300.00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de pagos (dummy) -->
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Monto</th>
+                                    <th>Método</th>
+                                    <th>Estatus</th>
+                                    <th>Referencia</th>
+                                    <th class="text-end">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>15/01/2026 12:30</td>
+                                    <td class="fw-semibold">$ 300.00</td>
+                                    <td>Transferencia</td>
+                                    <td><span class="badge bg-warning text-dark">Parcial</span></td>
+                                    <td>BBVA-12345</td>
+                                    <td class="text-end">
+                                        <button class="btn btn-outline-danger btn-sm">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>15/01/2026 13:10</td>
+                                    <td class="fw-semibold">$ 300.00</td>
+                                    <td>Efectivo</td>
+                                    <td><span class="badge bg-success">Pagado</span></td>
+                                    <td>-</td>
+                                    <td class="text-end">
+                                        <button class="btn btn-outline-danger btn-sm">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-muted small mt-2">
+                        *Este módulo se conectará a BD para calcular total/pagado/saldo automáticamente.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2">
+                <a asp-controller="Citas" asp-action="Index" class="btn btn-outline-secondary">
+                    Cancelar
+                </a>
+                <button type="submit" class="btn btn-sip" id="btnGuardarSesion">
+                    <i class="bi bi-save2"></i> Guardar sesión
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <!-- ===================== MODAL REGISTRAR PAGO ===================== -->
+    <div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0">
+                <div class="modal-header sip-modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-cash-coin"></i> Registrar pago
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="formPago" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <!-- IDs ocultos -->
+                        <input type="hidden" id="PagoId" name="PagoId" value="0" />
+                        <input type="hidden" id="SesionIdPago" name="SesionId" value="@Model.SesionId" />
+
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Monto</label>
+                                <input class="form-control" id="Monto" name="Monto" type="number" step="0.01" min="0" required placeholder="Ej. 600" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Método</label>
+                                <select class="form-select" id="MetodoPago" name="MetodoPago" required>
+                                    <option value="">Selecciona</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                    <option value="Tarjeta">Tarjeta</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Estatus</label>
+                                <select class="form-select" id="EstatusPago" name="EstatusPago" required>
+                                    <option value="Pagado">Pagado</option>
+                                    <option value="Parcial">Parcial</option>
+                                    <option value="Pendiente">Pendiente</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Referencia (opcional)</label>
+                                <input class="form-control" id="Referencia" name="Referencia" maxlength="100" placeholder="Ej. folio / últimos 4 dígitos" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Comentarios (opcional)</label>
+                                <input class="form-control" id="Comentarios" name="Comentarios" maxlength="200" placeholder="Ej. pago de anticipo" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-sip" id="btnGuardarPago">
+                        <i class="bi bi-save2"></i> Guardar pago
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.getElementById('btnGuardarPago').addEventListener('click', function () {
+            const monto = document.getElementById('Monto').value;
+            const metodo = document.getElementById('MetodoPago').value;
+            const estatus = document.getElementById('EstatusPago').value;
+
+            if (!monto || !metodo || !estatus) {
+                Swal.fire({ icon:'warning', title:'Falta info', text:'Completa Monto, Método y Estatus', confirmButtonColor:'#6b4b3e' });
+                return;
+            }
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Pago registrado (demo)',
+                text: `Monto: $${monto} - ${metodo} - ${estatus}`,
+                confirmButtonColor: '#6b4b3e'
+            }).then(() => {
+                bootstrap.Modal.getInstance(document.getElementById('modalPago')).hide();
+                document.getElementById('formPago').reset();
+            });
+        });
+    </script>
+
+}
+
+
