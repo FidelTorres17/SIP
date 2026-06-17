@@ -248,5 +248,38 @@ namespace SIP.Services
 
             return lista;
         }
+
+        public ExpedienteEditVm ObtenerActivoPorPaciente(int pacienteId)
+        {
+            ExpedienteEditVm expediente = null;
+
+            using (SqlConnection cn = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = new SqlCommand("stGetExpedienteActivoPorPaciente", cn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@PacienteId", pacienteId);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        expediente = new ExpedienteEditVm
+                        {
+                            ExpedienteId = Convert.ToInt32(dr["ExpedienteId"]),
+                            PacienteId = Convert.ToInt32(dr["PacienteId"]),
+                            UsuarioId = Convert.ToInt32(dr["UsuarioId"]),
+                            FechaInicio = Convert.ToDateTime(dr["FechaInicio"]),
+                            FechaCierre = dr["FechaCierre"] == DBNull.Value
+                                ? null
+                                : Convert.ToDateTime(dr["FechaCierre"])
+                        };
+                    }
+                }
+            }
+
+            return expediente;
+        }
     }
 }

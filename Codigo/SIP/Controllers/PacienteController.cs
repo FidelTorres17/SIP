@@ -9,17 +9,30 @@ namespace SIP.Controllers
     {
         private readonly PacienteService _pacienteService;
         private readonly ExpedienteService _expedienteService;
+        private readonly UsuarioService _usuarioService;
 
         public PacienteController(
-            PacienteService pacienteService, ExpedienteService expedienteService)
+            PacienteService pacienteService, ExpedienteService expedienteService, UsuarioService usuarioService)
         {
             _pacienteService = pacienteService;
             _expedienteService = expedienteService;
+            _usuarioService = usuarioService;
         }
         public IActionResult Index()
         {
             List<Paciente> _paciente = new List<Paciente>();
             _paciente = _pacienteService.lstPaciente();
+
+            ViewBag.EsAdmin = User.IsInRole("Administrador");
+
+            ViewBag.UsuarioIdLogueado =
+                Convert.ToInt32(User.FindFirst("UsuarioId")?.Value ?? "0");
+
+            if ((bool)ViewBag.EsAdmin)
+            {
+                ViewBag.Terapeutas = _usuarioService.ListarTerapeutas();
+            }
+
             return View(_paciente);
         }
 

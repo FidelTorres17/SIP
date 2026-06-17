@@ -101,5 +101,19 @@ namespace SIP.Controllers
 
             return View(vm);
         }
+
+        [HttpGet]
+        public IActionResult AbrirExpediente(int pacienteId)
+        {
+            var expediente = _expedienteService.ObtenerActivoPorPaciente(pacienteId);
+
+            if (expediente == null || expediente.ExpedienteId == null)
+            {
+                TempData["Error"] = "Este paciente aún no tiene expediente activo. El expediente se creará al iniciar una sesión.";
+                return RedirectToAction("Index", "Paciente");
+            }
+
+            return RedirectToAction("Detalle", "Expedientes", new { id = expediente.ExpedienteId });
+        }
     }
 }

@@ -125,7 +125,7 @@ $('#btnGuardarPaciente').on('click', function () {
    
 
     var paciente = {
-        UsuarioId: _PacienteId,
+        PacienteId: _PacienteId,
         Nombre: _Nombre,
         ApellidoP: _ApellidoP,
         ApellidoM: _ApellidoM,
@@ -159,24 +159,24 @@ $('#btnGuardarPaciente').on('click', function () {
     });
 });
 
-$('#tblPacientes').on('click', '.btnAgendarCita', function () {
-    const id = $(this).data('id');
-    const nombre = $(this).data('nombre');
+//$('#tblPacientes').on('click', '.btnAgendarCita', function () {
+//    const id = $(this).data('id');
+//    const nombre = $(this).data('nombre');
 
-    //$('#CitaPacienteId').val(id);
-    //$('#CitaPacienteNombre').val(nombre);
+//    //$('#CitaPacienteId').val(id);
+//    //$('#CitaPacienteNombre').val(nombre);
 
-    $('#lblPaciente').text(nombre);
-    $('#CitaPacienteId').val(id);
+//    $('#lblPaciente').text(nombre);
+//    $('#CitaPacienteId').val(id);
 
-    // Limpia campos básicos
-    $('#Fecha').val('');
-    $('#Hora').val('');
-    $('#TerapeutaId').val('');
-    $('#Notas').val('');
+//    // Limpia campos básicos
+//    $('#Fecha').val('');
+//    $('#Hora').val('');
+//    $('#TerapeutaId').val('');
+//    $('#Notas').val('');
 
-    // abre modal
-    const modal = new bootstrap.Modal(document.getElementById('modalCita'));
-    modal.show();
-});
+//    // abre modal
+//    const modal = new bootstrap.Modal(document.getElementById('modalCita'));
+//    modal.show();
+//});
 

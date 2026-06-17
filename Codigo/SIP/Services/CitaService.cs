@@ -101,7 +101,7 @@ namespace SIP.Services
 
                 command.Parameters.AddWithValue("@PacienteId", cita.PacienteId);
                 command.Parameters.AddWithValue("@UsuarioId", cita.UsuarioId);
-                command.Parameters.AddWithValue("@ExpedienteId", cita.ExpedienteId);
+                //command.Parameters.AddWithValue("@ExpedienteId", cita.ExpedienteId);
                 command.Parameters.AddWithValue("@EstatusCitaId", cita.EstatusCitaId);
                 command.Parameters.AddWithValue("@FechaHora", cita.FechaHora);
                 command.Parameters.AddWithValue("@Notas", cita.Notas);

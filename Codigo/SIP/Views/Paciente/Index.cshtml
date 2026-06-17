@@ -47,7 +47,7 @@
                                 <td>@u.Email</td>
 
                                 <td class="text-center">
-                                    <button type="button">
+                                    <button type="button"
                                             class="btn btn-outline-sip btn-sm btnEditar"
                                             data-id="@u.PacienteId"
                                             data-nombre="@u.Nombre"
@@ -56,7 +56,7 @@
                                         data-fechanacimiento="@(u.FechaNacimiento?.ToString("yyyy-MM-dd") ?? "")"
                                             data-email="@u.Email"
                                             data-telefono="@u.Telefono"
-                                            data-sexo="@u.Sexo"
+                                            data-sexo="@u.Sexo">
                                         <i class="bi bi-pencil-square"></i> Editar
                                     </button>
 
@@ -187,44 +187,66 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content border-0">
             <div class="modal-header sip-modal-header">
-                <h5 class="modal-title" id="tituloModalCita">
-                    <i class="bi bi-calendar2-plus"></i> Cita
+                <h5 class="modal-title">
+                    <i class="bi bi-calendar2-plus"></i> Agendar cita
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">
-                <form id="formCita" method="post">
+                <form id="formCita">
                     @Html.AntiForgeryToken()
-                    <input type="hidden" id="CitaId" name="CitaId" />
+
+                    <input type="hidden" id="CitaPacienteId" name="PacienteId" />
+                    <input type="hidden" id="EsAdmin" value="@ViewBag.EsAdmin.ToString().ToLower()" />
+
+                    @if (!(bool)ViewBag.EsAdmin)
+                    {
+                        <input type="hidden" id="CitaUsuarioId" name="UsuarioId" value="@ViewBag.UsuarioIdLogueado" />
+                    }
 
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">Fecha</label>
-                            <input type="date" class="form-control" id="Fecha" name="Fecha" required />
+                            <input type="date" class="form-control" id="Fecha" required />
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Hora</label>
-                            <input type="time" class="form-control" id="Hora" name="Hora" required />
+                            <input type="time" class="form-control" id="Hora" required />
                         </div>
 
                         <div class="col-md-6">
-                           @*  <label class="form-label">Paciente</label>
-                            <input class="form-control" id="Paciente" name="Paciente" placeholder="(dummy)" required /> *@
                             <div class="text-muted small">Paciente</div>
                             <div class="fw-semibold" id="lblPaciente"></div>
-                            <input type="hidden" id="CitaPacienteId" name="PacienteId" />
                         </div>
 
-                        @* <div class="col-md-6">
-                            <label class="form-label">Terapeuta</label>
-                            <input class="form-control" id="Terapeuta" name="Terapeuta" placeholder="(dummy)" required />
-                        </div> *@
+                        @if ((bool)ViewBag.EsAdmin)
+                        {
+                            <div class="col-md-6">
+                                <label class="form-label">Terapeuta</label>
+                                <select class="form-select" id="CitaUsuarioId" name="UsuarioId">
+                                    <option value="">Selecciona</option>
+                                    @foreach (var t in ViewBag.Terapeutas)
+                                    {
+                                        <option value="@t.UsuarioId">
+                                            @t.Nombre @t.ApellidoP @t.ApellidoM
+                                        </option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6">
+                                <div class="text-muted small">Terapeuta</div>
+                                <div class="fw-semibold">Usuario logueado</div>
+                            </div>
+                        }
 
                         <div class="col-md-6">
                             <label class="form-label">Estatus</label>
-                            <select class="form-select" id="EstatusCitaId" name="EstatusCitaId" required>
+                            <select class="form-select" id="EstatusCitaId" name="EstatusCitaId">
                                 <option value="">Selecciona</option>
                                 <option value="1">Pendiente</option>
                                 <option value="2">Confirmada</option>
@@ -234,14 +256,17 @@
 
                         <div class="col-md-6">
                             <label class="form-label">Notas</label>
-                            <input class="form-control" id="Notas" name="Notas" />
+                            <input class="form-control" id="Notas" name="Notas" maxlength="250" />
                         </div>
                     </div>
                 </form>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
                 <button type="button" class="btn btn-sip" id="btnGuardarCita">
                     <i class="bi bi-save2"></i> Guardar
                 </button>
@@ -260,6 +285,30 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
     <script src="~/js/Paciente.js"></script>
     <script>
+                @if (TempData["Error"] != null)
+        {
+                <script>
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Expediente no disponible',
+                        text: '@TempData["Error"]',
+                        confirmButtonColor: '#7A4A2E'
+                    });
+        </script>
+    }
+
+    @if (TempData["Ok"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Correcto',
+                text: '@TempData["Ok"]',
+                confirmButtonColor: '#7A4A2E'
+            });
+        </script>
+    }
+
         $(function () {
             // DataTable
             $('#tblPacientes').DataTable({
@@ -279,6 +328,83 @@
 
 
 
+        });
+
+              $(document).on('click', '.btnAgendarCita', function () {
+            const pacienteId = $(this).data('id');
+            const pacienteNombre = $(this).data('nombre');
+
+            $('#CitaPacienteId').val(pacienteId);
+            $('#lblPaciente').text(pacienteNombre);
+
+            $('#Fecha').val('');
+            $('#Hora').val('');
+            $('#EstatusCitaId').val('');
+            $('#Notas').val('');
+
+            if ($('#EsAdmin').val() === 'true') {
+                $('#CitaUsuarioId').val('');
+            }
+
+            new bootstrap.Modal(document.getElementById('modalCita')).show();
+        });
+
+        $('#btnGuardarCita').on('click', function () {
+            const fecha = $('#Fecha').val();
+            const hora = $('#Hora').val();
+
+            if (!$('#CitaPacienteId').val()) {
+                Swal.fire('Aviso', 'No se encontró el paciente.', 'warning');
+                return;
+            }
+
+            if (!$('#CitaUsuarioId').val()) {
+                Swal.fire('Aviso', 'Selecciona o valida el terapeuta.', 'warning');
+                return;
+            }
+
+            if (!fecha || !hora) {
+                Swal.fire('Aviso', 'Selecciona fecha y hora.', 'warning');
+                return;
+            }
+
+            if (!$('#EstatusCitaId').val()) {
+                Swal.fire('Aviso', 'Selecciona el estatus de la cita.', 'warning');
+                return;
+            }
+
+            const data = {
+                __RequestVerificationToken: $('#formCita input[name="__RequestVerificationToken"]').val(),
+                PacienteId: $('#CitaPacienteId').val(),
+                UsuarioId: $('#CitaUsuarioId').val(),
+                EstatusCitaId: $('#EstatusCitaId').val(),
+                FechaHora: `${fecha}T${hora}:00`,
+                Notas: $('#Notas').val()
+            };
+
+            $.ajax({
+                url: '/Citas/GuardarDesdePaciente',
+                type: 'POST',
+                data: data,
+                success: function (res) {
+                    if (res.ok) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Cita registrada',
+                            text: res.mensaje,
+                            confirmButtonColor: '#7A4A2E'
+                        }).then(() => {
+                            bootstrap.Modal.getInstance(document.getElementById('modalCita')).hide();
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire('Error', res.mensaje, 'error');
+                    }
+                },
+                error: function () {
+                    Swal.fire('Error', 'Ocurrió un error al guardar la cita.', 'error');
+                }
+            });
         });
     </script>
 }

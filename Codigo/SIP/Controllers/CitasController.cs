@@ -145,5 +145,39 @@ namespace SIP.Controllers
                 _ => "#6c757d"
             };
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult GuardarDesdePaciente(Cita cita)
+        {
+            bool esAdmin = User.IsInRole("Administrador");
+
+            int usuarioIdLogueado =
+                Convert.ToInt32(User.FindFirst("UsuarioId")?.Value ?? "0");
+
+            if (!esAdmin)
+            {
+                cita.UsuarioId = usuarioIdLogueado;
+            }
+
+            if (cita.PacienteId <= 0)
+                return Json(new { ok = false, mensaje = "Paciente no válido." });
+
+            if (cita.UsuarioId <= 0)
+                return Json(new { ok = false, mensaje = "Terapeuta no válido." });
+
+            if (cita.EstatusCitaId <= 0)
+                return Json(new { ok = false, mensaje = "Selecciona el estatus de la cita." });
+
+            if (cita.FechaHora == null)
+                return Json(new { ok = false, mensaje = "Selecciona fecha y hora." });
+
+            var result = _citaService.crearCita(cita);
+
+            if (result.ReturnCode != 1000)
+                return Json(new { ok = false, mensaje = "No se pudo registrar la cita." });
+
+            return Json(new { ok = true, mensaje = "Cita registrada correctamente." });
+        }
     }
 }
