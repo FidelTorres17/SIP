@@ -1,0 +1,404 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\views\\paciente\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\views\\paciente\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\controllers\\expedientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\controllers\\expedientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\views\\expedientes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\views\\expedientes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\models\\dashboardvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\models\\dashboardvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\services\\dashboardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\services\\dashboardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\models\\expedientedetallevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\models\\expedientedetallevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\views\\shared\\_layout - copia.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\views\\shared\\_layout - copia.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\views\\usuario\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\views\\usuario\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\views\\expedientes\\detalle.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\views\\expedientes\\detalle.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\services\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\services\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\controllers\\sesionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\controllers\\sesionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\views\\reportes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\views\\reportes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\controllers\\pacientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\controllers\\pacientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\controllers\\citascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\controllers\\citascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|c:\\users\\fidel\\onedrive\\documents\\github\\sip\\codigo\\sip\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D509FFDC-0BAD-4283-86C7-392F6784C221}|SIP\\SIP.csproj|solutionrelative:sip\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\fidel\\AppData\\Local\\SourceServer\\b550ce51623dcc99e2075661bde8a0e00b3589fe8bdc4d3b8021f01ed00e997c\\Codigo\\SIP\\Services\\EmailService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Paciente\\Index.cshtml",
+              "RelativeDocumentMoniker": "SIP\\Views\\Paciente\\Index.cshtml",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Paciente\\Index.cshtml",
+              "RelativeToolTip": "SIP\\Views\\Paciente\\Index.cshtml",
+              "ViewState": "AgIAANoAAAAAAAAAAADwv+wAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-30T00:44:33.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "SIP\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "SIP\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-30T01:25:56.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Expedientes\\Index.cshtml",
+              "RelativeDocumentMoniker": "SIP\\Views\\Expedientes\\Index.cshtml",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Expedientes\\Index.cshtml",
+              "RelativeToolTip": "SIP\\Views\\Expedientes\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-30T01:17:58.716Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ExpedienteDetalleVm.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Models\\ExpedienteDetalleVm.cs",
+              "RelativeDocumentMoniker": "SIP\\Models\\ExpedienteDetalleVm.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Models\\ExpedienteDetalleVm.cs",
+              "RelativeToolTip": "SIP\\Models\\ExpedienteDetalleVm.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-30T01:16:28.778Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DashboardVm.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Models\\DashboardVm.cs",
+              "RelativeDocumentMoniker": "SIP\\Models\\DashboardVm.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Models\\DashboardVm.cs",
+              "RelativeToolTip": "SIP\\Models\\DashboardVm.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAswBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-30T00:56:24.772Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "SIP\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "SIP\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-30T00:54:46.708Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ExpedientesController.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\ExpedientesController.cs",
+              "RelativeDocumentMoniker": "SIP\\Controllers\\ExpedientesController.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\ExpedientesController.cs",
+              "RelativeToolTip": "SIP\\Controllers\\ExpedientesController.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAkwGoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-30T00:37:58.812Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DashboardService.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Services\\DashboardService.cs",
+              "RelativeDocumentMoniker": "SIP\\Services\\DashboardService.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Services\\DashboardService.cs",
+              "RelativeToolTip": "SIP\\Services\\DashboardService.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAzwBsAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-30T02:03:46.117Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_Layout - Copia.cshtml",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Shared\\_Layout - Copia.cshtml",
+              "RelativeDocumentMoniker": "SIP\\Views\\Shared\\_Layout - Copia.cshtml",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Shared\\_Layout - Copia.cshtml",
+              "RelativeToolTip": "SIP\\Views\\Shared\\_Layout - Copia.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-30T01:30:32.759Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Models\\Usuario.cs",
+              "RelativeDocumentMoniker": "SIP\\Models\\Usuario.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Models\\Usuario.cs",
+              "RelativeToolTip": "SIP\\Models\\Usuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T23:57:46.293Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "SIP\\Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "SIP\\Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAtwEEAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T23:40:58.187Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "SesionesController.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\SesionesController.cs",
+              "RelativeDocumentMoniker": "SIP\\Controllers\\SesionesController.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\SesionesController.cs",
+              "RelativeToolTip": "SIP\\Controllers\\SesionesController.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T23:40:57.413Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "SIP\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "SIP\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T23:40:56.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "SIP\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "SIP\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T23:40:54.49Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Usuario\\Index.cshtml",
+              "RelativeDocumentMoniker": "SIP\\Views\\Usuario\\Index.cshtml",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Usuario\\Index.cshtml",
+              "RelativeToolTip": "SIP\\Views\\Usuario\\Index.cshtml",
+              "ViewState": "AgIAANUAAAAAAAAAAAAowDgBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-02T00:30:44.355Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Detalle.cshtml",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Expedientes\\Detalle.cshtml",
+              "RelativeDocumentMoniker": "SIP\\Views\\Expedientes\\Detalle.cshtml",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Expedientes\\Detalle.cshtml",
+              "RelativeToolTip": "SIP\\Views\\Expedientes\\Detalle.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-30T00:39:45.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UsuarioService.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Services\\UsuarioService.cs",
+              "RelativeDocumentMoniker": "SIP\\Services\\UsuarioService.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Services\\UsuarioService.cs",
+              "RelativeToolTip": "SIP\\Services\\UsuarioService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-01T23:46:48.575Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "SIP\\Services\\EmailService.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Services\\EmailService.cs",
+              "RelativeToolTip": "SIP\\Services\\EmailService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-01T23:04:54.57Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Auth\\Login.cshtml",
+              "RelativeDocumentMoniker": "SIP\\Views\\Auth\\Login.cshtml",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Auth\\Login.cshtml",
+              "RelativeToolTip": "SIP\\Views\\Auth\\Login.cshtml",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-04T00:37:21.74Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Reportes\\Index.cshtml",
+              "RelativeDocumentMoniker": "SIP\\Views\\Reportes\\Index.cshtml",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Views\\Reportes\\Index.cshtml",
+              "RelativeToolTip": "SIP\\Views\\Reportes\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-04T00:42:27.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "PacienteController.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\PacienteController.cs",
+              "RelativeDocumentMoniker": "SIP\\Controllers\\PacienteController.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\PacienteController.cs",
+              "RelativeToolTip": "SIP\\Controllers\\PacienteController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T23:40:55.987Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "CitasController.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\CitasController.cs",
+              "RelativeDocumentMoniker": "SIP\\Controllers\\CitasController.cs",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\Controllers\\CitasController.cs",
+              "RelativeToolTip": "SIP\\Controllers\\CitasController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T23:40:52.164Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\fidel\\AppData\\Local\\SourceServer\\b550ce51623dcc99e2075661bde8a0e00b3589fe8bdc4d3b8021f01ed00e997c\\Codigo\\SIP\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\b550ce51623dcc99e2075661bde8a0e00b3589fe8bdc4d3b8021f01ed00e997c\\Codigo\\SIP\\Services\\EmailService.cs",
+              "ToolTip": "C:\\Users\\fidel\\AppData\\Local\\SourceServer\\b550ce51623dcc99e2075661bde8a0e00b3589fe8bdc4d3b8021f01ed00e997c\\Codigo\\SIP\\Services\\EmailService.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\b550ce51623dcc99e2075661bde8a0e00b3589fe8bdc4d3b8021f01ed00e997c\\Codigo\\SIP\\Services\\EmailService.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAAABQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-01T23:44:44.85Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\appsettings.json",
+              "RelativeDocumentMoniker": "SIP\\appsettings.json",
+              "ToolTip": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\appsettings.json",
+              "RelativeToolTip": "SIP\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-01T23:00:58.733Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

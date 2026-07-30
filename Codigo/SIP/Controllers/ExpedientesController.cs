@@ -96,7 +96,7 @@ namespace SIP.Controllers
             if (vm == null)
             {
                 TempData["Error"] = "No se encontró el expediente.";
-                return RedirectToAction("Index", "Pacientes");
+                return RedirectToAction("Index", "Paciente");
             }
 
             return View(vm);
@@ -109,7 +109,7 @@ namespace SIP.Controllers
 
             if (expediente == null || expediente.ExpedienteId == null)
             {
-                TempData["Error"] = "Este paciente aún no tiene expediente activo. El expediente se creará al iniciar una sesión.";
+                TempData["Error"] = "Este paciente aún no tiene expediente activo. El expediente se creará al iniciar una sesión." ;
                 return RedirectToAction("Index", "Paciente");
             }
 

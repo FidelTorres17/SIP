@@ -17,101 +17,101 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SIP
 build_property.RootNamespace = SIP
-build_property.ProjectDir = C:\Users\Kaleb\Desktop\MFD\SIP\SIP\SIP\
+build_property.ProjectDir = C:\Users\fidel\OneDrive\Documents\GitHub\SIP\Codigo\SIP\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Kaleb\Desktop\MFD\SIP\SIP\SIP
+build_property.MSBuildProjectDirectory = C:\Users\fidel\OneDrive\Documents\GitHub\SIP\Codigo\SIP
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Auth/CambiarPassword.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Auth/CambiarPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxDYW1iaWFyUGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Auth/ForgotPassword.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Auth/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Auth/Login.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Citas/Calendario.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Citas/Calendario.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0YXNcQ2FsZW5kYXJpby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Citas/Index.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Citas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0YXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Expedientes/Crear.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Expedientes/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZWRpZW50ZXNcQ3JlYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Expedientes/Detalle.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Expedientes/Detalle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZWRpZW50ZXNcRGV0YWxsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Expedientes/Index.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Expedientes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZWRpZW50ZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Home/Index.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Home/Privacy.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Paciente/Index.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Paciente/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Reportes/Index.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Reportes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Sesiones/Crear.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Sesiones/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VzaW9uZXNcQ3JlYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Sesiones/Editar.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Sesiones/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VzaW9uZXNcRWRpdGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Shared/Error.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Usuario/Index.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Usuario/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/_ViewImports.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/_ViewStart.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Shared/_Layout - Copia.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Shared/_Layout - Copia.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQgLSBDb3BpYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-tpywvo9ag5
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Shared/_Layout.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-yvflhw5izd
 
-[C:/Users/Kaleb/Desktop/MFD/SIP/SIP/SIP/Views/Shared/_LayoutLogin.cshtml]
+[C:/Users/fidel/OneDrive/Documents/GitHub/SIP/Codigo/SIP/Views/Shared/_LayoutLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-sbhgcrs8sz

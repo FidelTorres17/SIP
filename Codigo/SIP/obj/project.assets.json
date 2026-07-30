@@ -6732,25 +6732,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kaleb\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\fidel\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kaleb\\Desktop\\MFD\\SIP\\SIP\\SIP\\SIP.csproj",
+      "projectUniqueName": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\SIP.csproj",
       "projectName": "SIP",
-      "projectPath": "C:\\Users\\Kaleb\\Desktop\\MFD\\SIP\\SIP\\SIP\\SIP.csproj",
-      "packagesPath": "C:\\Users\\Kaleb\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kaleb\\Desktop\\MFD\\SIP\\SIP\\SIP\\obj\\",
+      "projectPath": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\SIP.csproj",
+      "packagesPath": "C:\\Users\\fidel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\fidel\\OneDrive\\Documents\\GitHub\\SIP\\Codigo\\SIP\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Kaleb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\fidel\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6816,7 +6814,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.312/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

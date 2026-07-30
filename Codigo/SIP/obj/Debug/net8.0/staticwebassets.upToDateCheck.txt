@@ -1,6 +1,12 @@
+wwwroot\css\sip.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\img\logo.png
+wwwroot\js\Cita.js
+wwwroot\js\Expediente.js
+wwwroot\js\Paciente.js
 wwwroot\js\site.js
+wwwroot\js\Usuario.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
@@ -58,9 +64,3 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\img\logo.png
-wwwroot\css\sip.css
-wwwroot\js\Usuario.js
-wwwroot\js\Paciente.js
-wwwroot\js\Cita.js
-wwwroot\js\Expediente.js

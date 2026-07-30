@@ -16,50 +16,50 @@ namespace SIP.Services
             _settings = settings.Value;
         }
 
-        public void EnviarCorreo(
-            string destino,
-            string asunto,
-            string cuerpoHtml)
-        {
-            var email = new MimeMessage();
+        //public void EnviarCorreo(
+        //    string destino,
+        //    string asunto,
+        //    string cuerpoHtml)
+        //{
+        //    var email = new MimeMessage();
 
-            email.From.Add(
-                new MailboxAddress(
-                    _settings.FromName,
-                    _settings.FromEmail
-                )
-            );
+        //    email.From.Add(
+        //        new MailboxAddress(
+        //            _settings.FromName,
+        //            _settings.FromEmail
+        //        )
+        //    );
 
-            email.To.Add(
-                MailboxAddress.Parse(destino)
-            );
+        //    email.To.Add(
+        //        MailboxAddress.Parse(destino)
+        //    );
 
-            email.Subject = asunto;
+        //    email.Subject = asunto;
 
-            var builder = new BodyBuilder
-            {
-                HtmlBody = cuerpoHtml
-            };
+        //    var builder = new BodyBuilder
+        //    {
+        //        HtmlBody = cuerpoHtml
+        //    };
 
-            email.Body = builder.ToMessageBody();
+        //    email.Body = builder.ToMessageBody();
 
-            using var smtp = new SmtpClient();
+        //    using var smtp = new SmtpClient();
 
-            smtp.Connect(
-                _settings.Host,
-                _settings.Port,
-                SecureSocketOptions.StartTls
-            );
+        //    smtp.Connect(
+        //        _settings.Host,
+        //        _settings.Port,
+        //        SecureSocketOptions.StartTls
+        //    );
 
-            smtp.Authenticate(
-                _settings.User,
-                _settings.Password
-            );
+        //    smtp.Authenticate(
+        //        _settings.User,
+        //        _settings.Password
+        //    );
 
-            smtp.Send(email);
+        //    smtp.Send(email);
 
-            smtp.Disconnect(true);
-        }
+        //    smtp.Disconnect(true);
+        //}
 
         // ==============================
         // BIENVENIDA
@@ -126,11 +126,11 @@ namespace SIP.Services
 
             </div>";
 
-            EnviarCorreo(
-                destino,
-                asunto,
-                html
-            );
+            //EnviarCorreo(
+            //    destino,
+            //    asunto,
+            //    html
+            //);
         }
 
         // ==============================
@@ -193,11 +193,11 @@ namespace SIP.Services
 
             </div>";
 
-            EnviarCorreo(
-                destino,
-                asunto,
-                html
-            );
+            //EnviarCorreo(
+            //    destino,
+            //    asunto,
+            //    html
+            //);
         }
     }
 }

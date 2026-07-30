@@ -14,6 +14,8 @@
 
         public List<string> EstatusCitasLabels { get; set; } = new();
         public List<int> EstatusCitasData { get; set; } = new();
+
+        public List<Usuario> Usuario { get; set; } = new();
     }
 
     public class ProximaCitaVm

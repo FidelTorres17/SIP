@@ -41,7 +41,7 @@
                             <tr>
                                 <td>@i</td>
                                 <td class="fw-semibold">@nombreCompleto</td>
-                                // <td>@u.UserName</td>
+                                @*<td>@u.UserName</td>*@
                                 <td>@u.Email</td>
                                 <td>@u.Telefono</td>
                                 <td>
@@ -190,6 +190,101 @@
     </div>
 </div>
 
+<!-- ===================== MODAL CREAR / EDITAR ===================== -->
+<div class="modal fade" id="modalUsuario" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header sip-modal-header">
+                <h5 class="modal-title" id="tituloModalUsuario">
+                    <i class="bi bi-person-badge"></i> Usuario
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <div class="modal-body">
+                <!-- IMPORTANTE: tú decides si lo mandas por POST normal o AJAX -->
+                <form id="formUsuario" method="post">
+                    @Html.AntiForgeryToken()
+                    @* <input type="hidden" id="UsuarioId" name="UsuarioId" /> *@
+                    @Html.Hidden("Txt_UsuarioId", "", new { id = "Txt_UsuarioId" })
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Nombre</label>
+                            @* <input class="form-control" id="Nombre" name="Nombre" required /> *@
+                            @Html.TextBox("Txt_Nombre", "", new { @class = "form-control", id = "Txt_Nombre", required = "required" })
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Apellido Paterno</label>
+                            @* <input class="form-control" id="ApellidoP" name="ApellidoP" required /> *@
+                            @Html.TextBox("Txt_ApellidoP", "", new { @class = "form-control", id = "Txt_ApellidoP" })
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Apellido Materno</label>
+                            @* <input class="form-control" id="ApellidoM" name="ApellidoM" /> *@
+                            @Html.TextBox("Txt_ApellidoM", "", new { @class = "form-control", id = "Txt_ApellidoM", required = "required" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Rol</label>
+                            <!-- Si ya tienes catálogo de roles, aquí pones tu combo real -->
+                            @* <select class="form-select" id="RolId" name="RolId" required>
+                                <option value="">Selecciona</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Terapeuta</option>
+                                <option value="3">Asistente</option>
+                            </select> *@
+                            @Html.DropDownList("RolId", null, htmlAttributes: new { @class = "form-select", data_val = "true", data_val_required = "El campo es obligatorio." })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Teléfono</label>
+                            @*  <input class="form-control" id="Telefono" name="Telefono" maxlength="10" /> *@
+                            @Html.TextBox("Txt_Telefono", "", new { @class = "form-control", id = "Txt_Telefono", required = "required" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Email</label>
+                            @* <input class="form-control" id="Email" name="Email" type="email" required /> *@
+                            @Html.TextBox("Txt_Email", "", new { @class = "form-control", id = "Txt_Email", required = "required" })
+                        </div>
+
+                        @*  <div class="col-md-6">
+                            <label class="form-label">Usuario</label>
+                           
+                            @Html.TextBox("Txt_UserName", "", new { @class = "form-control", id = "Txt_UserName", required = "required" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Password</label>
+                            
+                            @Html.TextBox("Txt_Password", "", new { @class = "form-control", id = "Txt_Password", required = "required" })
+                        </div> *@
+
+                        @* <div class="col-12">
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="Activo" name="Activo" value="true">
+                                <label class="form-check-label" for="Activo">Activo</label>
+                            </div>
+                        </div> *@
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <!-- Este botón tú lo conectas a tu POST/AJAX -->
+                <button type="button" class="btn btn-sip" id="btnGuardarUsuario" onclick="guardarUsuario(event)">
+                    <i class="bi bi-save2"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <!-- DataTables (usa tu versión actual o reemplaza por la que tengas) -->
